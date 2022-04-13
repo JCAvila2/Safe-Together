@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    $emailDeUsuario = $_SESSION['email'];
     $nombreDeUsuario = $_SESSION['nombre']; // se agrega el nombre en la pantalla
     // falta agregar las demas variables de la base de datos para el mapa
 
@@ -17,6 +18,7 @@
     <link rel="stylesheet" href="assets/css/estilo_mapa.css">
     <script src="assets/js/script.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -31,7 +33,8 @@
     <!-- Obtener los datos de php para enviarlos a js -->
     <script> 
         <?php
-            echo "var jsvar = '$nombreDeUsuario';"
+            echo "var userName = '$nombreDeUsuario';";
+            echo "var userEmail = '$emailDeUsuario';";
         ?>
     </script>
 

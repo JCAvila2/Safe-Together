@@ -4,9 +4,10 @@ navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
     trackUserLocation:true
   })
   function successLocation(location) { // funcion que se ejecura cuando se puede acceder correctamente a la ubicacion del usuario
-    console.log(location);
-    //mostrarUsuario()
+    //console.log(location);
+    mostrarUsuario()
     hacerMapa([location.coords.longitude, location.coords.latitude])
+    actualizarLocalizacionDB(location.coords.latitude, location.coords.longitude)
   }
   function errorLocation() { // funcion que se ejecuta si no se puede acceder a la localizacion del usuario
     console.log("No se pudo acceder a la localizacion.")
@@ -38,14 +39,8 @@ navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
     map.addControl(nav);
   
   
-  
-    // agregar los marcadores de otros usuarios
-    for (var i = 0; i < 3; i++) {
-      let lat = 4.866699;
-      let long = -74.050632;
-      let nombre = "Usuario ejemplo " + i;
-      agregarMarcador(nombre, [long, lat])
-    }
+    buscarUsuarios()
+    
   
   }
   
@@ -63,15 +58,38 @@ navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
   
   // funcion para mostrar nombre el usuario
   function mostrarUsuario() {
-    /*
-    var nombreEnBD = "Nombre de Usuario"
-    var valorNombre = document.createTextNode(nombreEnBD)
+    var valorNombre = document.createTextNode(userName)
     document.getElementById("username").appendChild(valorNombre)
-    */
-  
-    var valorNombre = document.createTextNode(jsvar)
-    document.getElementById("username").appendChild(valorNombre)
-    console.log("El correo del usuario es: " + jsvar)
-  
-  
+    console.log("El nombre del usuario es: " + userName)
+    console.log("El correo del usuario es: " + userEmail)
+  }
+
+  // funcion para enviar la ubicacion actual a la base de datos
+  function actualizarLocalizacionDB(latitudActual, longitudActual) {
+    var nuevaLocalizacion = {};
+    nuevaLocalizacion.email = userEmail;
+    nuevaLocalizacion.latitud = latitudActual;
+    nuevaLocalizacion.longitud = longitudActual;
+    console.log(nuevaLocalizacion)
+    $.ajax({
+      url:"actualizarUbicacion.php",
+      method: "post",
+      data: { nuevaLocalizacion:JSON.stringify(nuevaLocalizacion)} ,
+      success: function(res) {
+        console.log("Enviado a php correctamente: " + res)
+      }
+    })
+  }
+
+
+  function buscarUsuarios(){ // agregar los marcadores de otros usuarios
+
+
+
+    for (var i = 0; i < 3; i++) {
+      let lat = 4.866699 + i * .2;
+      let long = -74.050632;
+      let nombre = "Usuario ejemplo" + i;
+      agregarMarcador(nombre, [long, lat])
+    }
   }

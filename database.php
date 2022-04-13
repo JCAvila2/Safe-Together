@@ -8,6 +8,15 @@
         $conn = new PDO("mysql:host=$server;dbname=$database;", $username, $password);
     } catch (PDOException $error) {
         die("Connetion failed: ".$error->getMesagge());
-    }
+    } 
 
+
+
+    /*
+    try {
+        $conn = new PDO("mysql:host=$server;dbname=$database;", $username, $password);
+    } catch (PDOException $error) {
+        die("Connetion failed: ".$error->getMesagge());
+    } 
+    */
 ?>
