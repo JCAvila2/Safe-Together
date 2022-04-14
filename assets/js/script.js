@@ -5,15 +5,15 @@ navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
   })
   function successLocation(location) { // funcion que se ejecuta cuando se puede acceder correctamente a la ubicacion del usuario
     actualizarLocalizacionDB(location.coords.latitude, location.coords.longitude) //enviar la ubicacion actual a la base de datos
-    mostrarUsuario()
     hacerMapa([location.coords.longitude, location.coords.latitude]) // crear mapa
     console.log("Se pudo acceder corretamente a la localizacion")
   }
   
   function errorLocation() { // funcion que se ejecuta si no se puede acceder a la localizacion del usuario
     console.log("No se pudo acceder a la localizacion.")
-    alert("No pudimos acceder a tu localización, cambia los permisos en la configuración del navegador")
-    mostrarUsuario()
+    alert("No pudimos acceder a tu localización, cambia los permisos de ubicación en la configuración del navegador")
+    var mensajeError = document.createTextNode("Activa la localización en la configuración del navegador y recarga la pestaña")
+    document.getElementById("map").appendChild(mensajeError)
   }
   
   function hacerMapa(location) { // funcion para crear el mapa de mapbox y colocarlo en el div con el id "map"
@@ -50,14 +50,6 @@ navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
     console.log("Se encontro al usuario " + nombre + " en la latitud: " + localizacionUsuario[1] + " y en la longitud: " + localizacionUsuario[0])
   }
   
-  // funcion para mostrar nombre el usuario en el header
-  function mostrarUsuario() {
-    var valorNombre = document.createTextNode(userName)
-    document.getElementById("username").appendChild(valorNombre)
-    console.log("El correo del usuario es: " + userEmail)
-    console.log("El nombre del usuario es: " + userName)
-  }
-
   // funcion para enviar la ubicacion actual a la base de datos
   function actualizarLocalizacionDB(latitudActual, longitudActual) {
     var nuevaLocalizacion = {};

@@ -10,7 +10,7 @@ body {
 
 /* Header */
 .parent {
-    background-color: blueviolet;
+    background: linear-gradient(120deg, #D8BCFF , #800661);
     position:relative;
     text-align: center;
     padding-top:20px;
@@ -28,8 +28,13 @@ body {
     position:absolute;
     top:20%;
     right:2%;
-    font-family: Verdana;
-    font-size: 1vw;
+}
+.change-icon > .fa + .fa,
+.change-icon:hover > .fa {
+  display: none;
+}
+.change-icon:hover > .fa + .fa {
+  display: inherit;
 }
 
 /* mapa */

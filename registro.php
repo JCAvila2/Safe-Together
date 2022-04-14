@@ -12,7 +12,7 @@
         // Se verifica si se creo una cuenta
         if ($stmt->execute()) {
             $message = 'Cuenta creada correctamente';
-            header("Location: ingresar.php");
+            header("Location: index.php");
         } else {
             $message = 'Lo sentimos, ocurrió un error creando tu cuenta';
         }
@@ -22,6 +22,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" href="assets/imagenes/miUbicacion.png" type="image/x-icon">
         <title>Registro</title>
         <link rel="stylesheet" href="assets/css/estilo_registro.php" media="screen">
     </head>
@@ -31,7 +32,7 @@
             <?php if (!empty($message)): ?>
                 <p style="text-align: center;"> <?= $message ?> </p>
             <?php endif; ?>
-            <form method="POST" action="ingresar.php">
+            <form method="POST" action="registro.php">
                 <div class="txt_field">
                     <input type="text" name="email" required>
                     <label>Correo</label>
@@ -46,7 +47,7 @@
                 </div>
                 <input type="submit" value="Ingresar">
                 <div class="ingresar">
-                    ¿Ya tienes cuenta? <a href="ingresar.php"> Ingresar</a>
+                    ¿Ya tienes cuenta? <a href="index.php"> Registrarse</a>
                 </div>
             </form>
         </div>
