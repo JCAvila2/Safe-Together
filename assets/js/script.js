@@ -8,6 +8,9 @@ navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
     mostrarUsuario()
     hacerMapa([location.coords.longitude, location.coords.latitude])
     actualizarLocalizacionDB(location.coords.latitude, location.coords.longitude)
+
+
+    buscarUsuarios() // colocar otros usuarios en el mapa
   }
   function errorLocation() { // funcion que se ejecuta si no se puede acceder a la localizacion del usuario
     console.log("No se pudo acceder a la localizacion.")
@@ -56,7 +59,7 @@ navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
     console.log("Se encontro al usuario " + nombre + " en la latitud: " + localizacionUsuario[1] + " y longitud: " + localizacionUsuario[0])
   }
   
-  // funcion para mostrar nombre el usuario
+  // funcion para mostrar nombre el usuario en el header
   function mostrarUsuario() {
     var valorNombre = document.createTextNode(userName)
     document.getElementById("username").appendChild(valorNombre)
@@ -76,20 +79,29 @@ navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
       method: "post",
       data: { nuevaLocalizacion:JSON.stringify(nuevaLocalizacion)} ,
       success: function(res) {
-        console.log("Enviado a php correctamente: " + res)
+        console.log(":D Enviado a php correctamente: " + res)
       }
     })
   }
 
 
-  function buscarUsuarios(){ // agregar los marcadores de otros usuarios
+  // agregar los marcadores de otros usuarios
+  function buscarUsuarios() { 
+    console.log(pruebaC)
+    console.log(pruebaC.length)
+    console.log(typeof(pruebaC))
+    
+    let lat;
+    let long;
+    let nombre;
+    for (var i = 0; i < pruebaC.length; i++) {
+      lat = pruebaC[i]['latitud'];
+      long = pruebaC[i]['longitud'];
+      nombre = pruebaC[i]['nombre'];
 
-
-
-    for (var i = 0; i < 3; i++) {
-      let lat = 4.866699 + i * .2;
-      let long = -74.050632;
-      let nombre = "Usuario ejemplo" + i;
-      agregarMarcador(nombre, [long, lat])
+      if (nombre != userName) {
+        agregarMarcador(nombre, [long, lat])
+      }  
     }
+  
   }

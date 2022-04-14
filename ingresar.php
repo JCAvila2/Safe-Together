@@ -11,7 +11,7 @@
 
         $message = '';
         //&& password_verify($_POST['password'], $results['password'])
-        if (count($results) > 0) {  // arreglar password
+        if (count($results) > 0 && password_verify($_POST['password'], $results['password'])) {  // arreglar password
             $_SESSION['email'] = $results['email'];
             $_SESSION['nombre'] = $results['nombre']; // se crea una variable de sesion (Se puede acceder a esta desde otros .php)
             header("Location: mapa.php");

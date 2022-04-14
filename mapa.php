@@ -1,9 +1,16 @@
-<?php 
+<?php
     session_start();
     $emailDeUsuario = $_SESSION['email'];
-    $nombreDeUsuario = $_SESSION['nombre']; // se agrega el nombre en la pantalla
-    // falta agregar las demas variables de la base de datos para el mapa
-
+    $nombreDeUsuario = $_SESSION['nombre'];
+    
+    require 'database.php';    
+    $sql = 'SELECT email, nombre, latitud, longitud FROM usuarios';
+    //ejecutar query
+    $records = $conn->prepare($sql);
+    $records->execute();
+    
+    // convertir en un objeto
+    $results = $records->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 
@@ -32,6 +39,7 @@
     
     <!-- Obtener los datos de php para enviarlos a js -->
     <script> 
+        var pruebaC = <?php echo json_encode($results)?> // objeto con las coordenadas de otros usuarios
         <?php
             echo "var userName = '$nombreDeUsuario';";
             echo "var userEmail = '$emailDeUsuario';";
