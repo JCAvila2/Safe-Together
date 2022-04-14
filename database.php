@@ -1,8 +1,8 @@
 <?php
     $server = 'localhost';
-    $username = 'hecker';
-    $password = '1234';
-    $database = "safe_together";
+    $username = 'id18771849_cronox';
+    $password = '88r%2C!gH=K{R3YT';
+    $database = "id18771849_safetogether";
 
     try {
         $conn = new PDO("mysql:host=$server;dbname=$database;", $username, $password);
