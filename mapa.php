@@ -39,7 +39,7 @@
     
     <!-- Obtener los datos de php para enviarlos a js -->
     <script> 
-        var pruebaC = <?php echo json_encode($results)?> // objeto con las coordenadas de otros usuarios
+        var baseDeDatosInfo = <?php echo json_encode($results)?> // objeto con las coordenadas de otros usuarios
         <?php
             echo "var userName = '$nombreDeUsuario';";
             echo "var userEmail = '$emailDeUsuario';";
